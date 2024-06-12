@@ -31,7 +31,12 @@ Para ejecutar los servidores necesarios, sigue estos pasos:
 ### Para Windows:
 
 1. En el el archivo *start-project.bat* ubicado en el directorio raíz del proyecto, ajusta las rutas de los comandos mongod, npm y la ubicación de la base de datos, según la configuración de tu equipo.
-2. Ejecuta el archivo *start-project.bat*. Este archivo se encarga de iniciar el servidor de MongoDB y el servidor Node.js con vigilancia de archivos.
+2. Ejecuta el archivo *start-project.bat*. Este archivo se encarga de iniciar el servidor de MongoDB y el servidor Node.js con vigilancia de archivos: 
+
+```
+.\start-project.bat
+```
+
 
 ### Para Linux y Mac:
 
