@@ -22,6 +22,17 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 // Configurar rutas
-
+app.get('/test-route', (req, res)=> {
+  return res.status(200).json(
+    {
+      'id': 1,
+      'name': 'Inés María',
+      'username': 'inesmaoria'
+    }
+  );
+})
 
 // Configurar el servidor para escuchar las peticiones HTTP
+app.listen(puerto, () => {
+  console.log("Servidor de NODE corriendo en el puerto", puerto)
+});
