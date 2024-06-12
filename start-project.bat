@@ -1,0 +1,2 @@
+start cmd.exe /k "cd /d C:\Program Files\MongoDB\Server\7.0\bin && mongod.exe --dbpath F:\Talento Tech\Full Stack Avanzado\bdata-mongodb"
+start cmd.exe /k "cd /d F:\Talento Tech\Full Stack Avanzado\api-social-network && npm run dev"
