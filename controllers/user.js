@@ -36,9 +36,9 @@ export const register = async (req, res) => {
 
     // Si encuentra un usuario, devuelve un mensaje indicando que ya existe
     if(existingUser) {
-      return res.status(200).json({
-        status: "sucess",
-        message: "El usuario ya existe"
+      return res.status(409).json({
+        status: "error",
+        message: "!El usuario ya existe!"
       });
     }
 
