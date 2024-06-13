@@ -1,7 +1,7 @@
 // Importaciones
 import { Router } from "express";
 const router = Router();
-import { testPublication } from "../controllers/publication.js";
+import { testPublication } from "../controllers/publications.js";
 
 // Definir las rutas
 router.get('/test-publication', testPublication);
