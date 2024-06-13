@@ -1,16 +1,15 @@
-import mongoose from "mongoose";
-
-const HOST_DB = "mongodb://localhost:27017"
-const NAME_DB = "bd_socialnet"
+import { connect } from "mongoose";
 
 const connection = async() => {
-    try {
-        await mongoose.connect(`${HOST_DB}/${NAME_DB}`)
-        console.log(`Conectado correctamente a la BD: ${NAME_DB}`);
-    } catch (error) {
-        console.log(error);
-        throw new Error(`No se pudo conectar a la base de datos: ${error}`)
-    }
+
+  try {
+    await connect("mongodb://localhost:27017/bd_socialnet");
+    console.log("Conectado correctamente a la BD: bd_socialnet");
+  } catch (error) {
+    console.log(error);
+    throw new error("¡No se ha podido conectar a la base de datos!");
+  }
+
 }
 
-export default connection
+export default connection;

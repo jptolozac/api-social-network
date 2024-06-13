@@ -1,14 +1,15 @@
 {
   "name": "api-social-network",
   "version": "1.0.0",
-  "description": "Social Media Aplication",
+  "description": "API REST con Stack MERN y autenticación JWT para una Red Social",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch index.js"
+    "start": "node index.js",
+    "start:watch": "node --watch index.js"
   },
-  "author": "",
+  "author": "Inés María Oliveros Hernández",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -20,5 +21,9 @@
     "mongoose-pagination": "^1.0.0",
     "multer": "^1.4.5-lts.1",
     "validator": "^13.12.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21"
   }
 }
