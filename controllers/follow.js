@@ -1,5 +1,6 @@
 import Follow from "../models/follow.js"
 import User from "../models/user.js"
+import { followUserIds } from "../services/followServices.js"
 
 
 // Acciones de prueba
@@ -180,6 +181,9 @@ export const following = async (req, res) => {
     // Buscar en la BD los seguidores y popular los datos de los usuarios
     const follows = await Follow.paginate({ following_user: userId }, options);
 
+    // Listar los seguidores de un usuario, obtener el array de IDs de los usuarios que sigo
+    let followUsers = await followUserIds(req);
+
     // Devolver respuesta
     return res.status(200).send({
       status: "success",
@@ -188,7 +192,9 @@ export const following = async (req, res) => {
       total: follows.totalDocs,
       pages: follows.totalPages,
       page: follows.page,
-      limit: follows.limit
+      limit: follows.limit,
+      users_following: followUsers.following,
+      user_follow_me: followUsers.followers
     });
 
   } catch (error) {
