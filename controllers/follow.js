@@ -152,5 +152,51 @@ export const unfollow = async (req, res) => {
   }
 }
 // Método para listar usuarios que estoy siguiendo
+export const following = async (req, res) => {
+  try {
+    // Obtener el ID del usuario identificado
+    let userId = req.user && req.user.userId ? req.user.userId : undefined;
+
+    // Comprobar si llega el ID por parámetro en la url (este tiene prioridad)
+    if (req.params.id) userId = req.params.id;
+
+    // Asignar el número de página
+    let page = req.params.page ? parseInt(req.params.page, 10) : 1;
+
+    // Número de usuarios que queremos mostrar por página
+    let itemsPerPage = req.query.limit ? parseInt(req.query.limit, 10) : 5;
+
+    // Configurar las opciones de la consulta
+    const options = {
+      page: page,
+      limit: itemsPerPage,
+      populate: {
+        path: 'followed_user',
+        select: '-password -role -__v'
+      },
+      lean: true
+    }
+    
+    // Buscar en la BD los seguidores y popular los datos de los usuarios
+    const follows = await Follow.paginate({ following_user: userId }, options);
+
+    // Devolver respuesta
+    return res.status(200).send({
+      status: "success",
+      message: "Listado de usuarios que estoy siguiendo",
+      follows: follows.docs,
+      total: follows.totalDocs,
+      pages: follows.totalPages,
+      page: follows.page,
+      limit: follows.limit
+    });
+
+  } catch (error) {
+    return res.status(500).send({
+      status: "error",
+      message: "Error al listar los usuarios que estás siguiendo."
+    });
+  }
+}
 
 // Método para listar los usuarios que me siguen
