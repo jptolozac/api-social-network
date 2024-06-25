@@ -186,9 +186,6 @@ export const uploadMedia = async (req, res) => {
     // Obtener el id de la publicación
     const publicationId = req.params.id;
 
-    console.log("req.params.id: ", req.params.id);
-    console.log("req.file: ", req.file);
-
     // Verificar si la publicación existe en la base de datos antes de subir el archivo
     const publicationExists = await Publication.findById(publicationId);
     if (!publicationExists) {
@@ -208,20 +205,15 @@ export const uploadMedia = async (req, res) => {
 
     // Obtener el nombre del archivo
     let image = req.file.originalname;
-    console.log("image: ", image);
     
     // Obtener la extensión del archivo
     const imageSplit = image.split(".");
     const extension = imageSplit[imageSplit.length -1];
-    
-    console.log("imageSplit: ", imageSplit);
-    console.log("extension: ", extension);
 
     // Validar la extensión
     if (!["png", "jpg", "jpeg", "gif"].includes(extension.toLowerCase())){
       //Borrar archivo subido
       const invalidFilePath = req.file.path;
-      console.log("invalidFilePath Validar la extensión: ", invalidFilePath);
       fs.unlinkSync(invalidFilePath );
 
       return res.status(400).send({
@@ -236,7 +228,6 @@ export const uploadMedia = async (req, res) => {
 
     if (fileSize > maxFileSize) {
       const largeFilePath = req.file.path;
-      console.log("largeFilePath  Comprobar tamaño del archivo: ", largeFilePath);
       fs.unlinkSync(largeFilePath );
 
       return res.status(400).send({
@@ -247,7 +238,6 @@ export const uploadMedia = async (req, res) => {
 
     // Verificar si el archivo realmente existe antes de proceder
     const actualFilePath  = path.resolve("./uploads/publications/", req.file.filename);
-    console.log("actualFilePath Verificar si el archivo realmente existe antes de proceder: ", actualFilePath);
     try {
       fs.statSync(actualFilePath); 
     } catch (error) {
@@ -263,8 +253,6 @@ export const uploadMedia = async (req, res) => {
       { file: req.file.filename },
       { new: true }
     );
-
-    console.log("publicationUpdated: ", publicationUpdated);
 
     if (!publicationUpdated) {
       return res.status(500).send({
