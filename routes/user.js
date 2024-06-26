@@ -1,7 +1,7 @@
 // Importaciones
 import { Router } from "express";
 const router = Router();
-import { register, testUser, login, profile, listUsers, updateUser, uploadFiles, avatar } from "../controllers/user.js";
+import { register, testUser, login, profile, listUsers, updateUser, uploadFiles, avatar, counters } from "../controllers/user.js";
 import { ensureAuth } from "../middlewares/auth.js";
 import User from "../models/user.js"
 import { checkEntityExists } from "../middlewares/checkEntityExists.js"
@@ -29,6 +29,7 @@ router.get('/list/:page?', ensureAuth, listUsers);
 router.put('/update', ensureAuth, updateUser);
 router.post('/upload', [ensureAuth, checkEntityExists(User, 'user_id'), uploads.single("file0")], uploadFiles);
 router.get('/avatar/:file', avatar);
+router.get('/counters/:id?', ensureAuth, counters);
 
 // Exportar el Router
 export default router;
