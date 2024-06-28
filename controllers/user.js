@@ -64,6 +64,7 @@ export const register = async (req, res) => {
         name: user_to_save.name,
         last_name: user_to_save.last_name,
         nick: user_to_save.nick,
+        email: user.email
       }
     });
 
@@ -125,12 +126,8 @@ export const login = async (req, res) => {
         id: user._id,
         name: user.name,
         last_name: user.last_name,
-        bio: user.bio,
-        email: user.email,
         nick: user.nick,
-        role: user.role,
-        image: user.image,
-        created_at: user.created_at
+        email: user.email
       }
     });
 
@@ -158,7 +155,7 @@ export const profile = async (req, res) => {
     }
 
     // Buscar al usuario en la BD, excluimos la contraseña, rol, versión.
-    const userProfile = await User.findById(userId).select('-password -role -__v -email');
+    const userProfile = await User.findById(userId).select('-password -role -__v');
 
     // Verificar si el usuario existe
     if (!userProfile) {
