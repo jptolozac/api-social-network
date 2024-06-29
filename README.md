@@ -6,7 +6,7 @@ Este proyecto es una API REST desarrollada con el Stack MERN (MongoDB, Express.j
 
 Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
 
-1. Clona este repositorio en tu máquina local:
+1. Clona este repositorio en tu máquina local (Crea un Fork si lo vas a editar):
 
     ```
     git clone https://github.com/inesmariao/api-social-network.git
