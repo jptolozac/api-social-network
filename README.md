@@ -48,3 +48,16 @@ Para ejecutar los servidores necesarios, sigue estos pasos:
     sh start-project.sh
     ```
 
+## Frontend
+
+Este backend está diseñado para trabajar con un frontend desarrollado en React + Vite. Puedes encontrar el repositorio del backend en el siguiente enlace:
+
+[Frontend para Red Social (React + Vite)](https://github.com/inesmariao/frontend_social_network.git)
+
+## Contribuciones
+
+En caso que estés interesad@ en contribuir al proyecto para hacer mejoras, puedes solicitarme unirte al repositorio como contribuidor, enviandome un correo a inesmaoh@gmail.com
+
+## Licencia
+
+Este proyecto está licenciado bajo la [Licencia ISC](https://opensource.org/licenses/ISC). Consulta el archivo LICENSE para más detalles.
