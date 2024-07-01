@@ -56,6 +56,9 @@ Este backend está diseñado para trabajar con un frontend desarrollado en React
 
 ## Contribuciones
 
+> [!NOTE]
+> ¡Si te gustó este proyecto, considera dejarme una estrella en el repositorio! 🌟
+
 En caso que estés interesad@ en contribuir al proyecto para hacer mejoras, puedes solicitarme unirte al repositorio como contribuidor, enviandome un correo a inesmaoh@gmail.com
 
 ## Licencia
