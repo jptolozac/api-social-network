@@ -8,19 +8,19 @@ Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
 
 1. Clona este repositorio en tu máquina local (Crea un Fork si lo vas a editar):
 
-    ```
+    ```bash
     git clone https://github.com/inesmariao/api-social-network.git
     ```
 
 2. Navega al directorio del proyecto:
 
-    ```
+    ```bash
     cd api-social-network
     ```
 
 3. Instala las dependencias del proyecto utilizando npm:
 
-    ```
+    ```bash
     npm install
     ```
 
@@ -30,42 +30,44 @@ Para ejecutar los servidores necesarios, sigue estos pasos:
 
 ### Para Windows:
 
-1. En el el archivo *start-project.bat* ubicado en el directorio raíz del proyecto, ajusta las rutas de los comandos mongod, npm y la ubicación de la base de datos, según la configuración de tu equipo.
-2. Ejecuta el archivo *start-project.bat*. Este archivo se encarga de iniciar el servidor de MongoDB y el servidor Node.js con vigilancia de archivos: 
+1. En el archivo `start-project.bat` ubicado en el directorio raíz del proyecto, ajusta las rutas de los comandos `mongod`, `npm` y la ubicación de la base de datos, según la configuración de tu equipo.
+2. Ejecuta el archivo `start-project.bat`. Este archivo se encarga de iniciar el servidor de MongoDB y el servidor Node.js con vigilancia de archivos: 
 
-```
-.\start-project.bat
-```
-
+    ```bash
+    .\start-project.bat
+    ```
 
 ### Para Linux y Mac:
 
-1. Edita el archivo *start-project.sh* (cambia la extensión a .sh) y ajusta las rutas de los comandos `mongod` y `npm` según sea necesario para tu sistema operativo.
+1. Edita el archivo `start-project.sh` (cambia la extensión a `.sh`) y ajusta las rutas de los comandos `mongod` y `npm` según sea necesario para tu sistema operativo.
 
-2. Ejecuta el archivo *start-project.sh* utilizando el siguiente comando:
+2. Ejecuta el archivo `start-project.sh` utilizando el siguiente comando:
 
-    ```
+    ```bash
     sh start-project.sh
     ```
 
-## Frontend
+> [!IMPORTANT]
+> Asegúrate de tener MongoDB instalado y configurado correctamente en tu máquina antes de ejecutar los servidores.
 
-Este backend está diseñado para trabajar con un frontend desarrollado en React + Vite. Puedes encontrar el repositorio del backend en el siguiente enlace:
-
-[Frontend para Red Social (React + Vite)](https://github.com/inesmariao/frontend_social_network.git)
+---
 
 ## Contribuciones
 
-> [!NOTE]
-> ¡Si te gustó este proyecto, considera dejarme una estrella en el repositorio! 🌟
+> [!TIP]
+> ¡Si te gustó este proyecto, puedes dejarme una estrella en el repositorio! 🌟
 
-En caso que estés interesad@ en contribuir al proyecto para hacer mejoras, puedes solicitarme unirte al repositorio como contribuidor, enviandome un correo a inesmaoh@gmail.com
+En caso que estés interesad@ en contribuir al proyecto para hacer mejoras, puedes solicitarme unirte al repositorio como contribuidor, enviándome un correo a inesmaoh@gmail.com
+
+> [!NOTE]
+> Por favor, sigue las guías de contribución y buenas prácticas antes de enviar un Pull Request.
 
 ## Licencia
 
 Este proyecto está licenciado bajo la [Licencia ISC](https://opensource.org/licenses/ISC). Consulta el archivo LICENSE para más detalles.
 
-Copyright 2024. Ing. Inés María Oliveros
+> [!IMPORTANT]
+> **Copyright 2024. Ing. Inés María Oliveros**
 
 Por la presente se concede permiso para utilizar, copiar, modificar y/o distribuir este software para cualquier fin, con o sin cargo, siempre que el aviso de copyright anterior y este aviso de permiso aparezcan en todas las copias.
 
@@ -73,7 +75,8 @@ EL SOFTWARE SE PROPORCIONA "TAL CUAL" Y EL AUTOR RECHAZA TODA GARANTÍA CON RESP
 
 ## License
 
-Copyright 2024. Ing. Inés María Oliveros Hernández
+> [!IMPORTANT]
+> **Copyright 2024. Ing. Inés María Oliveros Hernández**
 
 Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
