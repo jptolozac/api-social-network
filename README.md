@@ -30,8 +30,8 @@ Para ejecutar los servidores necesarios, sigue estos pasos:
 
 ### Para Windows:
 
-1. En el archivo `start-project.bat` ubicado en el directorio raíz del proyecto, ajusta las rutas de los comandos `mongod`, `npm` y la ubicación de la base de datos, según la configuración de tu equipo.
-2. Ejecuta el archivo `start-project.bat`. Este archivo se encarga de iniciar el servidor de MongoDB y el servidor Node.js con vigilancia de archivos: 
+1. En el archivo `start-project.bat` ubicado en el directorio raíz del proyecto, ajusta las rutas de los comandos `npm` según la configuración de tu equipo.
+2. Ejecuta el archivo `start-project.bat`. Este archivo se encarga de iniciar el servidor de Node.js con vigilancia de archivos:
 
     ```bash
     .\start-project.bat
@@ -39,8 +39,7 @@ Para ejecutar los servidores necesarios, sigue estos pasos:
 
 ### Para Linux y Mac:
 
-1. Edita el archivo `start-project.sh` (cambia la extensión a `.sh`) y ajusta las rutas de los comandos `mongod` y `npm` según sea necesario para tu sistema operativo.
-
+1. Edita el archivo `start-project.sh` y ajusta las rutas de los comandos `npm` según sea necesario para tu sistema operativo.
 2. Ejecuta el archivo `start-project.sh` utilizando el siguiente comando:
 
     ```bash
@@ -48,7 +47,7 @@ Para ejecutar los servidores necesarios, sigue estos pasos:
     ```
 
 > [!IMPORTANT]
-> Asegúrate de tener MongoDB instalado y configurado correctamente en tu máquina antes de ejecutar los servidores.
+> Asegúrate de tener Mongo Atlas Cloud configurado correctamente y la conexión de base de datos en el archivo `.env` antes de ejecutar el archivo de inicio. Este proyecto está configurado para trabajar con una conexión a Base de Datos con Mongo Atlas Cloud.
 
 ---
 
