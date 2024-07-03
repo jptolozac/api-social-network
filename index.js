@@ -6,6 +6,7 @@ import UserRoutes from './routes/user.js'
 import PublicationRoutes from './routes/publications.js'
 import FollowRoutes from './routes/follow.js'
 
+
 // Mensaje de bienvenida
 console.log("API NODE arriba");
 
@@ -15,7 +16,7 @@ connection();
 
 // Crear servidor de Node
 const app = express();
-const puerto = 3900;
+const puerto = process.env.PORT || 3900;
 
 // Configurar cors: permite que las peticiones se hagan correctamente
 app.use(cors());
