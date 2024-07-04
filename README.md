@@ -18,7 +18,19 @@ Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
     cd api-social-network
     ```
 
-3. Instala las dependencias del proyecto utilizando npm:
+3. Crea una carpeta en la raíz del proyecto llamada: .env: configura las variables de entorno con el string de conexión a Mongo Atlas Cloud y el puerto de conexión en local, así
+
+    ```bash
+    MONGODB_URI=aquí el string de conexión a Mongo Atlas sin comillas
+    PORT=####
+    `
+    Ejemplo:
+    ```bash
+    MONGODB_URI=mongodb+srv://tu_usuario_mongo_atlas_cloud:tu_password@tu_cluster.configuración_de_mongo.mongodb.net/tu_nombre_bd?retryWrites=true&w=majority
+    PORT=3900
+    `
+
+4. Instala las dependencias del proyecto utilizando npm:
 
     ```bash
     npm install
