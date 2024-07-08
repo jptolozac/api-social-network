@@ -1,8 +1,11 @@
 import User from "../models/user.js"
+import Follow from "../models/follow.js"
+import Publication from "../models/publication.js"
 import bcrypt from "bcrypt";
 import { createToken } from "../services/jwt.js"
 import fs from "fs";
 import path from "path";
+import { followThisUser, followUserIds } from "../services/followServices.js"
 
 // Acciones de prueba
 export const testUser = (req, res) => {
@@ -56,7 +59,13 @@ export const register = async (req, res) => {
     return res.status(201).json({
       status: "created",
       message: "Usuario registrado con éxito",
-      user: user_to_save
+      user: {
+        id: user_to_save.id,
+        name: user_to_save.name,
+        last_name: user_to_save.last_name,
+        nick: user_to_save.nick,
+        email: user_to_save.email
+      }
     });
 
   } catch (error) {
@@ -117,12 +126,8 @@ export const login = async (req, res) => {
         id: user._id,
         name: user.name,
         last_name: user.last_name,
-        bio: user.bio,
-        email: user.email,
         nick: user.nick,
-        role: user.role,
-        image: user.image,
-        created_at: user.created_at
+        email: user.email
       }
     });
 
@@ -141,21 +146,33 @@ export const profile = async (req, res) => {
     // Obtener el ID del usuario desde los parámetros de la URL
     const userId = req.params.id;
 
-    // Buscar al usuario en laBD, excluimos la contraseña, rol, versión.
-    const user = await User.findById(userId).select('-password -role -__v');
+    // Verificar si el ID recibido del usuario autenticado existe
+    if (!req.user || !req.user.userId) {
+      return res.status(404).send({
+        status: "error",
+        message: "Usuario no autenticado"
+      });
+    }
+
+    // Buscar al usuario en la BD, excluimos la contraseña, rol, versión.
+    const userProfile = await User.findById(userId).select('-password -role -__v');
 
     // Verificar si el usuario existe
-    if (!user) {
+    if (!userProfile) {
       return res.status(404).send({
         status: "error",
         message: "Usuario no encontrado"
       });
     }
 
+    // Información de seguimiento - (req.user.userId = Id del usuario autenticado) 
+    const followInfo = await followThisUser(req.user.userId, userId);
+
     // Devolver la información del perfil del usuario
     return res.status(200).json({
       status: "success",
-      user
+      user: userProfile,
+      followInfo
     });
 
   } catch (error) {
@@ -178,7 +195,7 @@ export const listUsers = async (req, res) => {
     const options = {
       page: page,
       limit: itemsPerPage,
-      select: '-password -role -__v'
+      select: '-password -role -__v -email'
     };
 
     const users = await User.paginate({}, options);
@@ -191,6 +208,9 @@ export const listUsers = async (req, res) => {
       });
     }
 
+    // Listar los seguidores de un usuario, obtener el array de IDs de los usuarios que sigo
+    let followUsers = await followUserIds(req);
+
     // Devolver los usuarios paginados
     return res.status(200).json({
       status: "success",
@@ -202,7 +222,9 @@ export const listUsers = async (req, res) => {
       hasPrevPage: users.hasPrevPage,
       hasNextPage: users.hasNextPage,
       prevPage: users.prevPage,
-      nextPage: users.nextPage
+      nextPage: users.nextPage,
+      users_following: followUsers.following,
+      user_follow_me: followUsers.followers
     });
   } catch (error) {
     console.log("Error al listar los usuarios:", error);
@@ -326,7 +348,7 @@ export const uploadFiles = async (req, res) => {
 
     // Comprobar tamaño del archivo (pj: máximo 1MB)
     const fileSize = req.file.size;
-    const maxFileSize = 1 * 1024 * 1024; // 5 MB
+    const maxFileSize = 1 * 1024 * 1024; // 1 MB
 
     if (fileSize > maxFileSize) {
       const filePath = req.file.path;
@@ -334,7 +356,7 @@ export const uploadFiles = async (req, res) => {
 
       return res.status(400).send({
         status: "error",
-        message: "El tamaño del archivo excede el límite (máx 5B)"
+        message: "El tamaño del archivo excede el límite (máx 1 MB)"
       });
     }
 
@@ -395,6 +417,56 @@ export const avatar = async (req, res) => {
     return res.status(500).send({
       status: "error",
       message: "Error al mostrar la imagen"
+    });
+  }
+}
+
+// Método para mostrar el contador de seguidores
+export const counters = async (req, res) => {
+  try {
+    // Obtener el id del usuarios autenticado desde el token
+    let userId = req.user.userId;
+
+    // En caso de llegar el id del usuario en los parametros (por la url) se toma como prioritario
+    if (req.params.id){
+      userId = req.params.id;
+    }
+
+    // Buscar el usuario por su userId para obtener nombre y apellido
+    const user = await User.findById(userId, { name: 1, last_name: 1});
+
+    // Si no encuentra al usuario
+    if (!user){
+      return res.status(404).send({
+        status: "error",
+        message: "Usuario no encontrado"
+      });
+    }
+
+    // Contar el número de usuarios que yo sigo (o el usuario autenticado)
+    const followingCount = await Follow.countDocuments({ "following_user": userId });
+    
+    // Contar el número de usuarios que me siguen a mi (o al usuario autenticado)
+    const followedCount = await Follow.countDocuments({ "followed_user": userId });
+    
+    // Contar el número de publicaciones que ha realizado el usuario
+    const publicationsCount = await Publication.countDocuments({ "user_id": userId });
+
+    // Devolver respuesta exitosa 
+    return res.status(200).json({
+      status: "success",
+      userId,
+      name: user.name,
+      last_name: user.last_name,
+      following: followingCount,
+      followed: followedCount,
+      publications: publicationsCount
+    });
+
+  } catch (error) {
+    return res.status(500).send({
+      status: "error",
+      message: "Error en los contadores"
     });
   }
 }
